@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
+import { Container, Row, Col } from 'reactstrap';
+import Link from 'next/link';
 import palletes from '../theme';
 import BaseContainer from '../components/layout/BaseContainer';
 import SearchIcon from '../components/icons/SearchIcon';
@@ -29,6 +31,41 @@ const Home = () => {
     },
   ];
 
+  const catItems = [
+    {
+      icon: '../assets/cat1.png',
+      text: 'Sayuran',
+    },
+    {
+      icon: '../assets/cat2.png',
+      text: 'Buah',
+    },
+    {
+      icon: '../assets/cat3.png',
+      text: 'Ikan',
+    },
+    {
+      icon: '../assets/cat4.png',
+      text: 'Daging',
+    },
+    {
+      icon: '../assets/cat5.png',
+      text: 'Remah',
+    },
+    {
+      icon: '../assets/cat6.png',
+      text: 'Bumbu',
+    },
+    {
+      icon: '../assets/cat7.png',
+      text: 'Camilan',
+    },
+    {
+      icon: '../assets/catOther.png',
+      text: 'Lainnya',
+    },
+  ];
+
   const Header = styled.div`
     display: flex;
     justify-content: space-between;
@@ -54,6 +91,7 @@ const Home = () => {
     outline: none;
     border: none;
     padding: 8px 8px 8px 32px;
+    font-family: 'Open Sans', sans-serif;
 
     &:placeholder {
       color: ${(props) => props.theme.GreyDark};
@@ -87,6 +125,14 @@ const Home = () => {
     margin-left: 8px;
   `;
 
+  const FragmentLayout = styled(Container)`
+    padding: 0 16px;
+  `;
+
+  const CatText = styled.div`
+    font-size: 12px;
+  `;
+
   return (
     <>
       <BaseContainer>
@@ -105,6 +151,18 @@ const Home = () => {
             <PinIcon />
             <CheckloactionText>Mau dikirim kemana?</CheckloactionText>
           </CheckLocation>
+          <FragmentLayout>
+            <Row>
+              {catItems.map((item) => (
+                <Link href="/">
+                  <Col className="mb-3 text-center" key={item.text}>
+                    <img src={item.icon} alt="ikon" />
+                    <CatText className="mt-1">{item.text}</CatText>
+                  </Col>
+                </Link>
+              ))}
+            </Row>
+          </FragmentLayout>
         </ThemeProvider>
       </BaseContainer>
     </>
