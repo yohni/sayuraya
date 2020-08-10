@@ -21,6 +21,8 @@ const BottomNavigation = () => {
     width: 100%;
     padding: 8px 8px 2px;
     display: flex;
+    z-index: 200;
+    background: #ffffff;
   `;
 
   const Item = styled.div`
