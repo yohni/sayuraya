@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   max-width: 480px;
   background: #fff;
-  margin: 0 auto;
+  margin: 0 auto 60px;
 `;
 
 const BaseContainer = ({ children }) => {
