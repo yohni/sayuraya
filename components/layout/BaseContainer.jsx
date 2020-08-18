@@ -16,13 +16,13 @@ const Container = styled.div`
   margin: 0 auto 60px;
 `;
 
-const BaseContainer = ({ children }) => {
+const BaseContainer = ({ children, show }) => {
   return (
     <ThemeProvider theme={palletes}>
       <Wrapper>
         <Container>
           {children}
-          <BottomNavigation />
+          {show && <BottomNavigation />}
         </Container>
       </Wrapper>
     </ThemeProvider>
@@ -31,6 +31,11 @@ const BaseContainer = ({ children }) => {
 
 BaseContainer.propTypes = {
   children: PropTypes.node.isRequired,
+  show: PropTypes.bool,
+};
+
+BaseContainer.defaultProps = {
+  show: true,
 };
 
 export default BaseContainer;
