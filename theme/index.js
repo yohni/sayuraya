@@ -7,6 +7,7 @@ const palletes = {
   GreyDark: '#B0B0B0',
   GreyText: '#636A75',
   OrangeWood: '#EF833B',
+  RedCalm: '#FF5858',
   YellowSmooth: '#FCE655',
   YellowCream: '#F3F1B4',
 };
