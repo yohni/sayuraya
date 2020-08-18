@@ -37,7 +37,7 @@ const BottomNavigation = () => {
 
   const ItemText = styled.div`
     padding-top: 2px;
-    font-size: 12px;
+    font-size: 10px;
     color: ${({ color }) => color};
   `;
 
