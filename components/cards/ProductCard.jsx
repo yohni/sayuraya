@@ -8,20 +8,20 @@ import CounterButton from '../buttons/CounterButton';
 
 const PCWrapper = styled.div`
   overflow: hidden;
-  max-width: 140px;
+  max-width: calc(100% - 8px);
+  margin: 0 4px 4px;
   width: 100%;
-  height: 240px;
+  height: 256px;
   background: #ffffff;
   border-radius: 5px;
-  margin-right: 8px;
   cursor: pointer;
 `;
 
 const PCImage = styled.img`
-  min-width: 220px;
-  width: 100%100%;
-  height: auto;
+  width: 100%;
+  height: 140px;
   object-fit: cover;
+  overflow: hidden;
 `;
 
 const PCLink = React.forwardRef(({ href, children }, ref) => {
