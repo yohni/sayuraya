@@ -11,6 +11,108 @@ import SlideShow from '../components/SlideShow';
 import ProductCard from '../components/cards/ProductCard';
 import CardSlider from '../components/cardSlider';
 
+const Header = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+`;
+
+const LogoBrand = styled.img`
+  height: 32px;
+  margin-right: 16px;
+`;
+
+const SearchBar = styled.div`
+  position: relative;
+  width: 100%;
+  font-size: 12px;
+`;
+
+const SearchInput = styled.input`
+  height: 32px;
+  width: 100%;
+  background: ${(props) => props.theme.GreyBasic};
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  padding: 8px 8px 8px 32px;
+  font-family: 'Open Sans', sans-serif;
+
+  &:placeholder {
+    color: ${(props) => props.theme.GreyDark};
+  }
+`;
+
+const IconWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  left: 8px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+`;
+
+const CheckLocation = styled.div`
+  margin: 0 24px;
+  padding: 8px 16px;
+  /* min-height: 264px; */
+  /* width: 100%; */
+  background: #fff;
+  transform: translateY(-24px);
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+`;
+
+const CheckloactionText = styled.div`
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-left: 8px;
+`;
+
+const FragmentLayout = styled(Container)`
+  padding: 0 16px;
+`;
+
+const CatText = styled.div`
+  font-size: 12px;
+`;
+
+const CatItem = React.forwardRef(({ icon, text, href }, ref) => {
+  return (
+    <a href={href} ref={ref}>
+      <img src={icon} alt="ikon" />
+      <CatText className="mt-1">{text}</CatText>
+    </a>
+  );
+});
+
+CatItem.propTypes = {
+  icon: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  href: PropTypes.string.isRequired,
+};
+
+const SectionTitle = styled.div`
+  font-family: 'Montserrat';
+  font-weight: 600;
+  font-size: 12px;
+  color: ${(props) => props.theme.BlackMain};
+`;
+
+const SectionSubtitle = styled.div`
+  font-size: 10px;
+`;
+
+const SayurLink = styled.a`
+  font-size: 12px;
+  color: ${(props) => props.theme.GreenPrimary} !important;
+`;
+
+const MainContainer = styled.div`
+  padding: 16px;
+`;
+
 const Home = () => {
   const items = [
     {
@@ -75,108 +177,6 @@ const Home = () => {
       text: 'Lainnya',
     },
   ];
-
-  const Header = styled.div`
-    display: flex;
-    justify-content: space-between;
-    padding: 12px 16px;
-  `;
-
-  const LogoBrand = styled.img`
-    height: 32px;
-    margin-right: 16px;
-  `;
-
-  const SearchBar = styled.div`
-    position: relative;
-    width: 100%;
-    font-size: 12px;
-  `;
-
-  const SearchInput = styled.input`
-    height: 32px;
-    width: 100%;
-    background: ${(props) => props.theme.GreyBasic};
-    border-radius: 5px;
-    outline: none;
-    border: none;
-    padding: 8px 8px 8px 32px;
-    font-family: 'Open Sans', sans-serif;
-
-    &:placeholder {
-      color: ${(props) => props.theme.GreyDark};
-    }
-  `;
-
-  const IconWrapper = styled.div`
-    position: absolute;
-    top: 0;
-    left: 8px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-  `;
-
-  const CheckLocation = styled.div`
-    margin: 0 24px;
-    padding: 8px 16px;
-    /* min-height: 264px; */
-    /* width: 100%; */
-    background: #fff;
-    transform: translateY(-24px);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-  `;
-
-  const CheckloactionText = styled.div`
-    font-size: 12px;
-    letter-spacing: 0.1em;
-    margin-left: 8px;
-  `;
-
-  const FragmentLayout = styled(Container)`
-    padding: 0 16px;
-  `;
-
-  const CatText = styled.div`
-    font-size: 12px;
-  `;
-
-  const CatItem = React.forwardRef(({ icon, text, href }, ref) => {
-    return (
-      <a href={href} ref={ref}>
-        <img src={icon} alt="ikon" />
-        <CatText className="mt-1">{text}</CatText>
-      </a>
-    );
-  });
-
-  CatItem.propTypes = {
-    icon: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    href: PropTypes.string.isRequired,
-  };
-
-  const SectionTitle = styled.div`
-    font-family: 'Montserrat';
-    font-weight: 600;
-    font-size: 12px;
-    color: ${(props) => props.theme.BlackMain};
-  `;
-
-  const SectionSubtitle = styled.div`
-    font-size: 10px;
-  `;
-
-  const SayurLink = styled.a`
-    font-size: 12px;
-    color: ${(props) => props.theme.GreenPrimary} !important;
-  `;
-
-  const MainContainer = styled.div`
-    padding: 16px;
-  `;
 
   return (
     <>
@@ -244,17 +244,6 @@ const Home = () => {
       </BaseContainer>
     </>
   );
-};
-
-Home.propTypes = {
-  theme: PropTypes.objectOf(PropTypes.string),
-};
-
-Home.defaultProps = {
-  theme: {
-    white: '#fff',
-    black: '#000',
-  },
 };
 
 export default Home;
