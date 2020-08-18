@@ -7,13 +7,17 @@ import BottomNavigation from '../BottomNavigation';
 
 const Wrapper = styled.div`
   width: 100%;
+  min-height: 100vh;
   background: ${(props) => props.theme.GreyBasic};
 `;
 
 const Container = styled.div`
   max-width: 480px;
   background: #fff;
-  margin: 0 auto 60px;
+  margin: 0 auto;
+  background: #ffffff;
+  min-height: 100vh;
+  padding-bottom: 64px;
 `;
 
 const BaseContainer = ({ children, show }) => {
