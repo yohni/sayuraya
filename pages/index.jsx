@@ -18,18 +18,18 @@ const Header = styled.div`
 `;
 
 const LogoBrand = styled.img`
-  height: 32px;
+  height: 40px;
   margin-right: 16px;
 `;
 
 const SearchBar = styled.div`
   position: relative;
   width: 100%;
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 const SearchInput = styled.input`
-  height: 32px;
+  height: 40px;
   width: 100%;
   background: ${(props) => props.theme.GreyBasic};
   border-radius: 5px;
@@ -45,7 +45,7 @@ const SearchInput = styled.input`
 
 const IconWrapper = styled.div`
   position: absolute;
-  top: 0;
+  top: 4px;
   left: 8px;
   height: 32px;
   display: flex;
@@ -54,7 +54,7 @@ const IconWrapper = styled.div`
 
 const CheckLocation = styled.div`
   margin: 0 24px;
-  padding: 8px 16px;
+  padding: 12px 16px;
   /* min-height: 264px; */
   /* width: 100%; */
   background: #fff;
@@ -65,7 +65,7 @@ const CheckLocation = styled.div`
 `;
 
 const CheckloactionText = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   letter-spacing: 0.1em;
   margin-left: 8px;
 `;
