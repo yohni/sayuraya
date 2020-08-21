@@ -19,7 +19,7 @@ const PCWrapper = styled.div`
 
 const PCImage = styled.img`
   width: 100%;
-  height: 140px;
+  height: 180px;
   object-fit: cover;
   overflow: hidden;
 `;

@@ -76,13 +76,14 @@ const FragmentLayout = styled(Container)`
 
 const CatText = styled.div`
   font-size: 12px;
+  margin: 12px 0;
 `;
 
 const CatItem = React.forwardRef(({ icon, text, href }, ref) => {
   return (
     <a href={href} ref={ref}>
       <img src={icon} alt="ikon" />
-      <CatText className="mt-1">{text}</CatText>
+      <CatText>{text}</CatText>
     </a>
   );
 });
@@ -96,16 +97,16 @@ CatItem.propTypes = {
 const SectionTitle = styled.div`
   font-family: 'Montserrat';
   font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
   color: ${(props) => props.theme.BlackMain};
 `;
 
 const SectionSubtitle = styled.div`
-  font-size: 10px;
+  font-size: 12px;
 `;
 
 const SayurLink = styled.a`
-  font-size: 12px;
+  font-size: 14px;
   color: ${(props) => props.theme.GreenPrimary} !important;
 `;
 
