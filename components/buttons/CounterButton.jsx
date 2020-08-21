@@ -11,7 +11,7 @@ const WrapperButton = styled.div`
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 const WrapperCounter = styled.div`
@@ -22,7 +22,7 @@ const WrapperCounter = styled.div`
   display: flex;
   justify-content: space-around;
   padding: 5px 0;
-  font-size: 12px;
+  font-size: 14px;
 `;
 
 const CounterButton = (props) => {

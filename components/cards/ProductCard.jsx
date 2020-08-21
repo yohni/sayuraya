@@ -11,7 +11,7 @@ const PCWrapper = styled.div`
   max-width: calc(100% - 8px);
   margin: 0 4px 4px;
   width: 100%;
-  height: 256px;
+  height: 316px;
   background: #ffffff;
   border-radius: 5px;
   cursor: pointer;
@@ -52,14 +52,14 @@ const DiscBadge = styled.div`
 const CardBody = styled.div`
   padding: 12px;
   position: relative;
-  height: 80px;
+  height: 92px;
 `;
 
 const CardTitle = styled.h3`
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
-  font-size: 12px;
-  width: 100px;
+  font-size: 14px;
+  width: 132px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -68,14 +68,14 @@ const CardTitle = styled.h3`
 
 const PCpeace = styled.div`
   font-family: 'Montserrat', sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   color: ${(props) => props.theme.GreyText};
 `;
 
 const PCbasePrice = styled(PCpeace)`
   text-decoration: line-through;
   color: red;
-  font-size: 8px;
+  font-size: 10px;
 `;
 
 const PriceWrapper = styled.div`
@@ -85,7 +85,7 @@ const PriceWrapper = styled.div`
 
 const CutPrice = styled.h3`
   color: ${(props) => props.theme.GreenPrimary};
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
 `;
 
