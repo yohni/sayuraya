@@ -5,6 +5,7 @@ import propTypes from 'prop-types';
 import pallete from '../../theme';
 
 import CounterButton from '../buttons/CounterButton';
+import ButtonFav from '../buttonFavorite';
 
 const PCWrapper = styled.div`
   overflow: hidden;
@@ -47,6 +48,12 @@ const DiscBadge = styled.div`
   font-weight: 600;
   font-size: 12px;
   border-radius: 0 5px 5px 0;
+`;
+
+const FavWrapper = styled.div`
+  position: absolute;
+  top: 8px;
+  right: 8px;
 `;
 
 const CardBody = styled.div`
@@ -115,6 +122,9 @@ const ProductCard = (props) => {
           <div>
             <div className="position-relative">
               <PCImage src={src} alt="Image" />
+              <FavWrapper onClick={(e) => e.stopPropagation()}>
+                <ButtonFav />
+              </FavWrapper>
               {discount > 0 && <DiscBadge>{`Hemat ${discount}%`}</DiscBadge>}
             </div>
             <CardBody>
