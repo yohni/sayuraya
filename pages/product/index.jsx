@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Button } from 'reactstrap';
+import Router from 'next/router';
 import palletes from '../../theme';
 import BaseContainer from '../../components/layout/BaseContainer';
 import ArrowBackIcon from '../../components/icons/ArrowBackIcon';
@@ -98,7 +99,13 @@ const ProductDetail = () => {
       <BaseContainer show={false}>
         <Header>
           <HeaderNav>
-            <BackButton className="shadow-sm">
+            <BackButton
+              className="shadow-sm"
+              onClick={(e) => {
+                e.preventDefault();
+                Router.back();
+              }}
+            >
               <ArrowBackIcon />
               <span className="pl-2">Kembali</span>
             </BackButton>
