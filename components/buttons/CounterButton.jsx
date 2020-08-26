@@ -7,7 +7,7 @@ const WrapperButton = styled.div`
   background: ${(props) => props.theme.GreenPrimary};
   color: #ffffff;
   border-radius: 5px;
-  padding: 5px 0;
+  padding: 8px 0;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
@@ -21,7 +21,7 @@ const WrapperCounter = styled.div`
   color: #000000;
   display: flex;
   justify-content: space-around;
-  padding: 5px 0;
+  padding: 8px 0;
   font-size: 14px;
 `;
 
