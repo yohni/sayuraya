@@ -43,7 +43,7 @@ const BottomNavigation = () => {
 
   const ActiveLink = () => {
     switch (router.pathname) {
-      case '/wishlist':
+      case '/favorite':
         setActivedLink(1);
         break;
       case '/myorder':
@@ -73,11 +73,11 @@ const BottomNavigation = () => {
             </ItemText>
           </Item>
         </Link>
-        <Link href="/wishlist">
+        <Link href="/favorite">
           <Item>
             <LoveIcon color={activedLink === 1 ? palletes.GreenPrimary : palletes.GreyDark} />
             <ItemText color={activedLink === 1 ? palletes.GreenPrimary : palletes.GreyDark}>
-              Wishlist
+              Favorit
             </ItemText>
           </Item>
         </Link>
