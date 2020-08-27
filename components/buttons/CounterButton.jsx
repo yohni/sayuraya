@@ -12,6 +12,7 @@ const WrapperButton = styled.div`
   font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   font-size: 14px;
+  width: inherit;
 `;
 
 const WrapperCounter = styled.div`
@@ -23,6 +24,7 @@ const WrapperCounter = styled.div`
   justify-content: space-around;
   padding: 8px 0;
   font-size: 14px;
+  width: inherit;
 `;
 
 const CounterButton = (props) => {
@@ -33,11 +35,23 @@ const CounterButton = (props) => {
         <WrapperButton onClick={onClick}>Beli</WrapperButton>
       ) : (
         <WrapperCounter>
-          <div role="button" onClick={handleDecrease} onKeyup={handleDecrease} tabIndex="0">
+          <div
+            className="w-100 text-center"
+            role="button"
+            onClick={handleDecrease}
+            onKeyup={handleDecrease}
+            tabIndex="0"
+          >
             -
           </div>
           <div>{sumProduct}</div>
-          <div role="button" onClick={handleIncrease} onKeyup={handleIncrease} tabIndex="0">
+          <div
+            className="w-100 text-center"
+            role="button"
+            onClick={handleIncrease}
+            onKeyup={handleIncrease}
+            tabIndex="0"
+          >
             +
           </div>
         </WrapperCounter>
