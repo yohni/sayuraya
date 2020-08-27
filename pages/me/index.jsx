@@ -7,7 +7,7 @@ import Services from '../../components/services';
 
 const Wrapper = styled.div`
   background: ${({ theme }) => theme.GreenPrimary};
-  min-height: 120vh;
+
   position: relative;
 `;
 
@@ -37,13 +37,10 @@ const MyName = styled.div`
   font-size: 13px;
   color: #ffffff;
   font-weight: 600;
+  margin-bottom: 48px;
 `;
 
 const StaticSheet = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   background: #ffffff;
   border-radius: 35px 35px 0px 0px;
   padding: 48px 16px 16px;
