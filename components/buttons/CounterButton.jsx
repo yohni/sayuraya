@@ -39,7 +39,7 @@ const CounterButton = (props) => {
             className="w-100 text-center"
             role="button"
             onClick={handleDecrease}
-            onKeyup={handleDecrease}
+            onKeyUp={handleDecrease}
             tabIndex="0"
           >
             -
@@ -49,7 +49,7 @@ const CounterButton = (props) => {
             className="w-100 text-center"
             role="button"
             onClick={handleIncrease}
-            onKeyup={handleIncrease}
+            onKeyUp={handleIncrease}
             tabIndex="0"
           >
             +

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import PropTypes from 'prop-types';
@@ -79,9 +80,9 @@ const CatText = styled.div`
   margin: 12px 0;
 `;
 
-const CatItem = React.forwardRef(({ icon, text, href }, ref) => {
+const CatItem = React.forwardRef(({ icon, text }, ref) => {
   return (
-    <a href={href} ref={ref}>
+    <a ref={ref}>
       <img src={icon} alt="ikon" />
       <CatText>{text}</CatText>
     </a>
@@ -91,7 +92,6 @@ const CatItem = React.forwardRef(({ icon, text, href }, ref) => {
 CatItem.propTypes = {
   icon: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
-  href: PropTypes.string.isRequired,
 };
 
 const SectionTitle = styled.div`

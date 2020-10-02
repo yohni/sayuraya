@@ -101,7 +101,7 @@ const CardContainer = styled.div`
 `;
 
 const ProductCard = (props) => {
-  const { src, loved, discount, name, price, pcs, href } = props;
+  const { src, discount, name, price, pcs, href } = props;
 
   const [sumProduct, setSumProduct] = useState(0);
 
@@ -118,7 +118,7 @@ const ProductCard = (props) => {
   return (
     <ThemeProvider theme={pallete}>
       <PCWrapper className="shadow-sm">
-        <Link href={href} loved={loved}>
+        <Link href={href}>
           <div>
             <div className="position-relative">
               <PCImage src={src} alt="Image" />
@@ -152,7 +152,7 @@ const ProductCard = (props) => {
 
 ProductCard.propTypes = {
   src: propTypes.string.isRequired,
-  loved: propTypes.bool,
+
   discount: propTypes.string,
   name: propTypes.string.isRequired,
   price: propTypes.string.isRequired,
@@ -161,7 +161,6 @@ ProductCard.propTypes = {
 };
 
 ProductCard.defaultProps = {
-  loved: false,
   discount: '0',
 };
 
