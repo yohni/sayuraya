@@ -193,10 +193,12 @@ const Home = () => {
             </SearchBar>
           </Header>
           <SlideShow items={items} />
-          <CheckLocation className="shadow">
-            <PinIcon />
-            <CheckloactionText>Mau dikirim kemana?</CheckloactionText>
-          </CheckLocation>
+          <Link href="/set-my-address">
+            <CheckLocation className="shadow">
+              <PinIcon />
+              <CheckloactionText>Mau dikirim kemana?</CheckloactionText>
+            </CheckLocation>
+          </Link>
           <FragmentLayout>
             <Row>
               {catItems.map((item) => (

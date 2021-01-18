@@ -14,8 +14,12 @@
     "react": "16.13.1",
     "react-bottom-sheet": "^1.1.1",
     "react-dom": "16.13.1",
+    "react-geocode": "^0.2.1",
+    "react-google-autocomplete": "^1.2.6",
+    "react-google-maps": "^9.4.5",
     "react-slick": "^0.27.5",
     "reactstrap": "^8.5.1",
+    "recompose": "^0.30.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.1.1"
   },
