@@ -18,6 +18,7 @@ const Container = styled.div`
   background: #ffffff;
   min-height: 100vh;
   padding-bottom: 64px;
+  position: relative;
 `;
 
 const BaseContainer = ({ children, show }) => {
