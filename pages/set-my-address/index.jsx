@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+/* eslint-disable no-plusplus */
+/* eslint-disable no-undef */
+import React, { useEffect, useState } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import styled, { ThemeProvider } from 'styled-components';
 import Geocode from 'react-geocode';
 import Autocomplete from 'react-google-autocomplete';
 import { Card, Form, Input, FormGroup, Label, Button } from 'reactstrap';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import BaseContainer from '../../components/layout/BaseContainer';
 import palletes from '../../theme';
 import ArrowBackIcon from '../../components/icons/ArrowBackIcon';
-import Link from 'next/link';
 
 Geocode.setApiKey(process.env.apiKey);
 
@@ -77,47 +80,29 @@ const SubmitBtn = styled(Button)`
 `;
 
 // eslint-disable-next-line react/prefer-stateless-function
-class SetAddress extends Component {
-  state = {
-    address: '',
-    province: '',
-    regency: '',
-    directions: null,
-    openInfo: true,
-    mapLoc: {
-      lat: 0,
-      lang: 0,
-    },
-    markerLoc: {
-      lat: 0,
-      lang: 0,
-    },
+const SetAddress = () => {
+  const [address, setAddress] = useState('');
+  const [province, setProvince] = useState('');
+  const [regency, setRegency] = useState('');
+  const [directions, setDirections] = useState(null);
+  const [openInfo, setOpenInfo] = useState(true);
+  const [mapLoc, setMapLoc] = useState({ lat: 0, lang: 0 });
+  const [markerLoc, setMarkerLoc] = useState({ lat: 0, lang: 0 });
+  const router = useRouter();
+
+  const onToggleOpen = () => {
+    setOpenInfo(false);
   };
 
-  onToggleOpen = () => {
-    this.setState({
-      openInfo: false,
-    });
+  const setMarkerLocation = (lat, lang) => {
+    setMapLoc({ lat, lang });
+    setMarkerLoc({ lat, lang });
   };
 
-  setMarkerLoc = (lat, lang) => {
-    this.setState({
-      markerLoc: {
-        lat: lat,
-        lang: lang,
-      },
-      mapLoc: {
-        lat: lat,
-        lang: lang,
-      },
-    });
-    console.log(this.state.markerLoc);
-  };
-
-  getCity = (addressArray) => {
+  const getCity = (addressArray) => {
     let city = '';
     for (let i = 0; i < addressArray.length; i++) {
-      if (addressArray[i].types[0] && 'administrative_area_level_2' === addressArray[i].types[0]) {
+      if (addressArray[i].types[0] && addressArray[i].types[0] === 'administrative_area_level_2') {
         city = addressArray[i].long_name;
         return city;
       }
@@ -125,63 +110,62 @@ class SetAddress extends Component {
     return '';
   };
 
-  getArea = (addressArray) => {
-    let area = '';
-    for (let i = 0; i < addressArray.length; i++) {
-      if (addressArray[i].types[0]) {
-        for (let j = 0; j < addressArray[i].types.length; j++) {
-          if (
-            'sublocality_level_1' === addressArray[i].types[j] ||
-            'locality' === addressArray[i].types[j]
-          ) {
-            area = addressArray[i].long_name;
-            return area;
-          }
-        }
-      }
-    }
-  };
+  // const getArea = (addressArray) => {
+  //   let area = '';
+  //   for (let i = 0; i < addressArray.length; i++) {
+  //     if (addressArray[i].types[0]) {
+  //       for (let j = 0; j < addressArray[i].types.length; j++) {
+  //         if (
+  //           addressArray[i].types[j] === 'sublocality_level_1' ||
+  //           addressArray[i].types[j] === 'locality'
+  //         ) {
+  //           area = addressArray[i].long_name;
+  //           return area;
+  //         }
+  //       }
+  //     }
+  //   }
+  // };
 
-  getState = (addressArray) => {
+  const getState = (addressArray) => {
     let state = '';
     for (let i = 0; i < addressArray.length; i++) {
-      for (let i = 0; i < addressArray.length; i++) {
+      for (let j = 0; j < addressArray.length; j++) {
         if (
           addressArray[i].types[0] &&
-          'administrative_area_level_1' === addressArray[i].types[0]
+          addressArray[i].types[0] === 'administrative_area_level_1'
         ) {
           state = addressArray[i].long_name;
           return state;
         }
       }
     }
+    return '';
   };
 
-  handleDragEnd = (e) => {
-    this.onToggleOpen();
-    let newLat = e.latLng.lat();
-    let newLng = e.latLng.lng();
+  const handleDragEnd = (e) => {
+    onToggleOpen();
+    const newLat = e.latLng.lat();
+    const newLng = e.latLng.lng();
 
     Geocode.fromLatLng(newLat, newLng)
       .then((resp) => {
-        const address = resp.results[0].formatted_address,
-          addressArray = resp.results[0].address_components,
-          regency = this.getCity(addressArray),
-          province = this.getState(addressArray);
-        this.setState({
-          address,
-          regency,
-          province,
-        });
-        this.setMarkerLoc(newLat, newLng);
+        const newAddress = resp.results[0].formatted_address;
+        const addressArray = resp.results[0].address_components;
+        const newRegency = getCity(addressArray);
+        const newProvince = getState(addressArray);
+        setAddress(newAddress);
+        setRegency(newRegency);
+        setProvince(newProvince);
+        setMarkerLocation(newLat, newLng);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  directionSetup = async () => {
-    const { lat, lang } = this.state.markerLoc;
+  const directionSetup = async () => {
+    const { lat, lang } = markerLoc;
     try {
       const DirectionsService = await new window.google.maps.DirectionsService();
 
@@ -193,9 +177,7 @@ class SetAddress extends Component {
         },
         async (result, status) => {
           if (status === google.maps.DirectionsStatus.OK) {
-            this.setState({
-              directions: result.routes[0].legs[0],
-            });
+            setDirections(result.routes[0].legs[0]);
           } else {
             console.error(`error fetching directions`);
           }
@@ -206,150 +188,125 @@ class SetAddress extends Component {
     }
   };
 
-  onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    const { markerLoc, address, regency, province } = this.state;
-    this.directionSetup()
-      .then((resp) => {
-        const payload = {
-          address,
-          regency,
-          province,
-          coords: markerLoc,
-          steps: {
-            distance: this.state.directions && this.state.directions.distance.value,
-            duration: this.state.directions && this.state.directions.duration.value,
-          },
-        };
-        console.log(payload);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    try {
+      await directionSetup();
+      const payload = {
+        address,
+        regency,
+        province,
+        coords: markerLoc,
+        steps: {
+          distance: directions && directions.distance.value,
+          duration: directions && directions.duration.value,
+        },
+      };
+      console.log(payload);
+      router.back();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  componentDidMount() {
+  useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.setState(
-          {
-            mapLoc: {
-              lat: position.coords.latitude,
-              lang: position.coords.longitude,
-            },
-            markerLoc: {
-              lat: position.coords.latitude,
-              lang: position.coords.longitude,
-            },
-          },
-          () => {
-            Geocode.fromLatLng(position.coords.latitude, position.coords.longitude)
-              .then((resp) => {
-                const address = resp.results[0].formatted_address,
-                  addressArray = resp.results[0].address_components,
-                  regency = this.getCity(addressArray),
-                  province = this.getState(addressArray);
-                this.setState({
-                  address,
-                  regency,
-                  province,
-                });
-                console.log(this.state);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
-        );
+        setMarkerLocation(position.coords.latitude, position.coords.longitude);
+
+        Geocode.fromLatLng(position.coords.latitude, position.coords.longitude)
+          .then((resp) => {
+            directionSetup();
+            const newAddress = resp.results[0].formatted_address;
+            const addressArray = resp.results[0].address_components;
+            const newRegency = getCity(addressArray);
+            const newProvince = getState(addressArray);
+            setAddress(newAddress);
+            setRegency(newRegency);
+            setProvince(newProvince);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
     } else {
       console.error('Geolocation is not supported by this browser!');
     }
-  }
+  });
 
-  onPlaceSelected = (place) => {
-    const address = place.formatted_address,
-      addressArray = place.address_components,
-      regency = this.getCity(addressArray),
-      province = this.getState(addressArray);
-    this.setState({
-      address,
-      regency,
-      province,
-    });
-    this.setMarkerLoc(place.geometry.location.lat(), place.geometry.location.lng());
+  const onPlaceSelected = (place) => {
+    const newAddress = place.formatted_address;
+    const addressArray = place.address_components;
+    const newRegency = getCity(addressArray);
+    const newProvince = getState(addressArray);
+    setAddress(newAddress);
+    setRegency(newRegency);
+    setProvince(newProvince);
+    setMarkerLoc(place.geometry.location.lat(), place.geometry.location.lng());
   };
 
-  render() {
-    const { markerLoc, mapLoc } = this.state;
-    const MapWithAMarker = withScriptjs(
-      withGoogleMap(() => (
-        <div>
-          <SearchBox className="py-3 px-4">
-            <Link href="/">
-              <BackButton type="button" className="shadow">
-                <ArrowBackIcon />
-              </BackButton>
-            </Link>
-            <SearchField
-              placeholder="Cari Alamat"
-              className="shadow"
-              onPlaceSelected={this.onPlaceSelected}
-              types={['establishment', 'geocode']}
-            />
-          </SearchBox>
-          <GoogleMap
-            defaultZoom={18}
-            defaultCenter={{ lat: mapLoc.lat, lng: mapLoc.lang }}
-            defaultOptions={{
-              disableDefaultUI: true,
-            }}
-          >
-            <Marker
-              draggable
-              onDragEnd={this.handleDragEnd}
-              position={{ lat: markerLoc.lat, lng: markerLoc.lang }}
-            >
-              {this.state.openInfo && (
-                <InfoWindow onCloseClick={this.onToggleOpen}>
-                  <>Drag marker ke alamat kamu</>
-                </InfoWindow>
-              )}
-            </Marker>
-          </GoogleMap>
-        </div>
-      ))
-    );
-
-    return (
-      <ThemeProvider theme={palletes}>
-        <BaseContainer show={false}>
-          <MapWithAMarker
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `320px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
+  const MapWithAMarker = withScriptjs(
+    withGoogleMap(() => (
+      <div>
+        <SearchBox className="py-3 px-4">
+          <Link href="/">
+            <BackButton type="button" className="shadow">
+              <ArrowBackIcon />
+            </BackButton>
+          </Link>
+          <SearchField
+            placeholder="Cari Alamat"
+            className="shadow"
+            onPlaceSelected={onPlaceSelected}
+            types={['establishment', 'geocode']}
           />
-          <MyCard className="px-4 py-3">
-            <Form onSubmit={this.onSubmit}>
-              <FormGroup>
-                <Label className="font-weight-bold">Alamat</Label>
-                <Input
-                  style={{ fontSize: '14px' }}
-                  value={this.state.address}
-                  type="textarea"
-                  disabled
-                />
-              </FormGroup>
-              <SubmitBtn className="font-weight-bold" type="submit">
-                Simpan
-              </SubmitBtn>
-            </Form>
-          </MyCard>
-        </BaseContainer>
-      </ThemeProvider>
-    );
-  }
-}
+        </SearchBox>
+        <GoogleMap
+          defaultZoom={18}
+          defaultCenter={{ lat: mapLoc.lat, lng: mapLoc.lang }}
+          defaultOptions={{
+            disableDefaultUI: true,
+          }}
+        >
+          <Marker
+            draggable
+            onDragEnd={handleDragEnd}
+            position={{ lat: markerLoc.lat, lng: markerLoc.lang }}
+          >
+            {openInfo && (
+              <InfoWindow onCloseClick={onToggleOpen}>
+                <>Drag marker ke alamat kamu</>
+              </InfoWindow>
+            )}
+          </Marker>
+        </GoogleMap>
+      </div>
+    ))
+  );
+
+  return (
+    <ThemeProvider theme={palletes}>
+      <BaseContainer show={false}>
+        <MapWithAMarker
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `320px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+        <MyCard className="px-4 py-3">
+          <Form onSubmit={onSubmit}>
+            <FormGroup>
+              <Label className="font-weight-bold">Alamat</Label>
+              <Input style={{ fontSize: '14px' }} value={address} type="textarea" disabled />
+            </FormGroup>
+            <SubmitBtn className="font-weight-bold" type="submit">
+              Simpan
+            </SubmitBtn>
+          </Form>
+        </MyCard>
+      </BaseContainer>
+    </ThemeProvider>
+  );
+};
 
 export default SetAddress;
