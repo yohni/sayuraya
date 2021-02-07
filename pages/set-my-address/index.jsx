@@ -12,7 +12,7 @@ import BaseContainer from '../../components/layout/BaseContainer';
 import palletes from '../../theme';
 import ArrowBackIcon from '../../components/icons/ArrowBackIcon';
 
-Geocode.setApiKey(process.env.apiKey);
+Geocode.setApiKey(process.env.NEXT_PUBLIC_G_KEY);
 
 const MyCard = styled(Card)`
   position: absolute;
@@ -288,7 +288,7 @@ const SetAddress = () => {
     <ThemeProvider theme={palletes}>
       <BaseContainer show={false}>
         <MapWithAMarker
-          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.apiKey}&v=3.exp&libraries=geometry,drawing,places`}
+          googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_G_KEY}&v=3.exp&libraries=geometry,drawing,places`}
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<div style={{ height: `320px` }} />}
           mapElement={<div style={{ height: `100%` }} />}
